@@ -1,0 +1,60 @@
+\documentclass[article]{memoir}
+
+\usepackage{amsmath}
+
+\title{Notes from TEK5050}
+\author{Kristian Monsen Haug}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+\chapter{Introduction}
+
+Not very important?
+
+\chapter{Light and radiometry}
+\section{Crash course: Light}
+
+Three models of light:
+\begin{enumerate}
+    \item Ray model: Useful for modeling light geometrically.
+    \item Wave model: Works where the ray model breaks down (diffraction and interference)
+    \item Particle model: Describes how light is generated and absorbed. Light is described as \emph{photons}. Useful when talking about noise properties of detectors.
+\end{enumerate}
+
+\paragraph{Maxwell's equations}
+\begin{equation}
+    \frac{c^2}{\varepsilon \mu} \nabla^2 \mathbf{E} = \frac{\partial^2\mathbf{E}}{\partial t^2}    
+\end{equation}
+
+\section{Crash course: Interaction of light with matter}
+
+\paragraph{Energy flux}
+The rate of energy transfer. Both units \([W]\) and \([Wm^2]\) can be used, depending on context(?)
+
+\paragraph{Refraction}
+occurs when light travels from one (transparent?) medium to another. The change in propagation speed leads to a bending of the light described by Snell's law:
+\begin{equation}
+    n_1 \sin \theta_1 = n_2 \sin \theta_2
+\end{equation}
+Where \(n\) is the refraction index, and \(\theta\) is the angle
+
+\paragraph{Absorption}
+happens when light loses energy while propagating through a medium. Energy is transferred to the medium. Often as heat, but also occurs in generation of power from a solar cell. The degree of absorption depends on the wavelength of the light, and the material. Over a distance \(x\), the resulting flux is given by
+\[
+    \phi = \phi_0 \exp{(- \alpha x)}
+\]
+where \(\alpha\) is the absorption coefficient. We also denote \(1/\alpha\) as the \emph{absorption length}
+
+\paragraph{Reflection and transmission}
+When incident on a smooth surface, light is reflected. Often, some is also transmitted through the angle. The relationship (angle and energy) between the incident, reflected and transmitted waves  are given by Fresnel's formulas.
+
+% TODO: Write Fresnel's formulas
+The left hand side of the formulas give the amplitude reflection and transmission coefficients (relative amplitude of the three waves), depending on parallel or perpendicular to the plane of incidence.
+
+
+\end{document}
+
+
