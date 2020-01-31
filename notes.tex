@@ -2,6 +2,8 @@
 
 \usepackage{amsmath}
 
+\newcommand{\unit}[1]{\left[#1\right]}
+
 \title{Notes from TEK5050}
 \author{Kristian Monsen Haug}
 \date{\today}
@@ -10,12 +12,7 @@
 \maketitle
 
 
-\chapter{Introduction}
-
-Not very important?
-
-\chapter{Light and radiometry}
-\section{Crash course: Light}
+\chapter{Light and interaction with matter}
 
 Three models of light:
 \begin{enumerate}
@@ -29,8 +26,6 @@ Three models of light:
     \frac{c^2}{\varepsilon \mu} \nabla^2 \mathbf{E} = \frac{\partial^2\mathbf{E}}{\partial t^2}    
 \end{equation}
 
-\section{Crash course: Interaction of light with matter}
-
 \paragraph{Energy flux}
 The rate of energy transfer. Both units \([W]\) and \([Wm^2]\) can be used, depending on context(?)
 
@@ -39,8 +34,14 @@ occurs when light travels from one (transparent?) medium to another. The change 
 \begin{equation}
     n_1 \sin \theta_1 = n_2 \sin \theta_2
 \end{equation}
-Where \(n\) is the refraction index, and \(\theta\) is the angle
+Where \(n\) is the refractive index, and \(\theta\) is the angle
 
+When light is refracted, the speed and wavelength changes, but the frequency stays the same.
+
+\paragraph{Refractive index}
+\[
+    n = \sqrt{\varepsilon \mu} = \frac{\text{speed of light in vacuum } c}{\text{speed of light inside the material}}
+\]
 \paragraph{Absorption}
 happens when light loses energy while propagating through a medium. Energy is transferred to the medium. Often as heat, but also occurs in generation of power from a solar cell. The degree of absorption depends on the wavelength of the light, and the material. Over a distance \(x\), the resulting flux is given by
 \[
@@ -53,6 +54,178 @@ When incident on a smooth surface, light is reflected. Often, some is also trans
 
 % TODO: Write Fresnel's formulas
 The left hand side of the formulas give the amplitude reflection and transmission coefficients (relative amplitude of the three waves), depending on parallel or perpendicular to the plane of incidence.
+
+\paragraph{Diffuse refraction and volume scattering}
+When light is incident on a rough surface, light is reflected in many different directions. The way this happens, is described by the material's bidirectional reflectance distribution function (BRDF). This must be found experimentally.
+
+This sort of ``random'' scattering can also happen \emph{inside} materials, where small parts of the beam is reflected in different directions, due to inhomogeneities in the material.
+
+\chapter{Radiometry}
+Subfield of optics concerned with measuring the amount of light.
+
+\paragraph{Solid angle} Just like we measure angle in terms of the distance it spans when projected onto the unit circle, we measure solid angle in terms of the area on the unit sphere.
+
+\paragraph{Radiance}
+\[
+L = \frac{\text{light energy}}{\text{surface area} \times \text{time} \times \text{solid angle}} \left[\frac{J}{m^2 s\; \text{steradian}}\right]
+\]
+As a practicau example, consider a sheet of paper of a certain size. In the equation above, we use the area of the sheet. The radiance also depend on the solid angle it spans as seen from our eye.
+
+\paragraph{Irradiance and excitance}
+Total amount of power per surface area
+\[
+    E\text{ or } M = \iint_\Omega L d\Omega \left[\frac{J}{m^2 s}\right]
+\]
+\paragraph{Flux}
+Integrating irradiance over e.g. the area of a detector, gives us the total power over an area.
+\[
+    \phi = \iint_\text{area} E dA \left[W\right]
+\]
+\paragraph{Energy}
+\[
+    Q = \int_\text{time} \phi dt [J]
+\]
+
+\paragraph{Intensity}
+It is sometimes useful to consider light sources as point (e.g. stars). To obtain the same measure of light strength for other sources, we need to integrate over the source area 
+\[
+    I = \iint_{\text{source area}} L dA \unit{\frac{J}{s \text{steradian}}}
+\]
+
+\paragraph{Spectral radiance}
+``Spectral'' variants of the above densities are defined because we sometimes are interested in differentiating between different wavelength.
+\[
+    L_{\lambda} = \frac{\text{light energy}}{\text{surface area} \times wavelength \times \text{time} \times \text{solid angle}} \left[\frac{J}{m^2 \;\mu m \; s\; \text{steradian}}\right]
+\]
+
+The unit \emph{flick} is sometimes used (1 \(W\) per steradian per square centimeter of surface per micrometer of wavelength). The radiance \(L\) can be obtained by simply integrating over every wavelength.
+
+\paragraph{Quantum measures}
+Instead of measuring the energy, we are often interested in counting the number of photons. We precede their names with ``photon'' and use the subscript \(q\). Thus, we obtain e.g. ``photon spectral radiance'' \(L_{q\lambda}\)
+
+\paragraph{Lambertian source}
+A Lambertian source is an ideal diffuse reflector: The radiance of the reflected light is independent of angle (brightness is the same regardless of viewing angle). Consequently, the total amount of light varies with angle proportionally to the projected area in the viewing direction.
+
+The intensity is
+\[
+    I = \frac{\partial \phi}{\partial \Omega} = L A_{\text{source}} \cos{\theta}
+\]
+Using this, we can obtain a simple relation between radiance and excitance
+\[
+    M = \iint_{\text{hemisphere}} L \cos{\theta} d \Omega = L \pi
+\]
+
+\paragraph{Planck's law}
+Expressed as different quantities
+\begin{itemize}
+    \item Spectral radiance
+	\[
+	    L_\lambda = \frac{2hc^2}{\lambda^5} \frac{1}{e^{hc/\lambda k T} - 1} \unit{\frac{W}{m^2 m \; sr}}
+	\]
+	
+    \item Photon spectral radiance
+
+	\[
+	    L_{q\lambda} = \frac{2c}{\lambda^4} \frac{1}{e^{hc/\lambda k T} - 1} \unit{\frac{\text{photons}}{s \;m^2 m \; sr}}
+	\]
+    \item Spectral excitance
+	\[
+	    M_{\lambda} = \frac{2\pi h c^2}{\lambda^5} \frac{1}{e^{hc/\lambda k T} - 1} \unit{\frac{W}{m^2 m}}
+	\]
+	
+
+    \item Photon spectral excitance
+	\[
+	    M_{q\lambda} = \frac{2\pi c}{\lambda^4} \frac{1}{e^{hc/\lambda k T} - 1} \unit{\frac{\text{photons}}{s m^2 m}}
+	\]
+\end{itemize}
+
+\paragraph{The Stefan--Boltzmann law}
+Total power per area for a black body
+\[
+    M(T) = \frac{2 \pi}{15} \frac{k^4}{c^2 h^3}T^4 \equiv \sigma T^4 \unit{\frac{W}{m^2}}
+\]
+\paragraph{The Wien displacement law}
+Tells us the peak wavelength for a black body of a certain temperature, according to Planck's law.
+\[
+    \lambda_{\text{max}} = \frac{2898}{T} \approx \frac{3000}{T} \unit{\mu m}
+\]
+\paragraph{Emissivity}
+Tells us how much something radiates, compared to an ideal black body
+\[
+    \varepsilon(\lambda, T) = \frac{M_\lambda(\lambda, T)_{\text{source}}}{M_{e\lambda}(\lambda, T)_{\text{Planck}}}
+\]
+
+We can use this with the Stefan--Boltzmann law
+\[
+    M(T) = \varepsilon \sigma T^4
+\]
+By conservation of energy
+\[
+    \phi_{\text{absorbed}} +\phi_{\text{reflected}} +\phi_{\text{transmitted}} =\phi_{\text{incident}}
+\]
+We obtain Kirchoff's law
+\[
+    A + R + T = 1
+\]
+which in turn gives us a relation between the emissivity and the reflectance
+\[
+    \varepsilon = A = 1 - R
+\]
+
+For opaque objects.
+
+% TODO: Some practical light sources and atmosphere
+
+\chapter{Detectors}
+
+\paragraph{Photon detectors}
+\begin{itemize}
+    \item ``Counts'' photons. Incoming photons excite an electron.
+    \item Photons must have a certain energy (cutoff frequency)
+    \item Respond proportionally to photon flux. Higher frequency does not mean higher output.
+
+\end{itemize}
+\paragraph{Thermal detectors}
+\begin{itemize}
+    \item No cutoff frequency.
+    \item Photons hitting the detectors allow the excited state to relax, which generates heat we can detect.
+\end{itemize}
+
+\section{Signal model}
+Assume input irradiance \(E\) with wavelength \(\lambda\) onto a photon detector with area \(A_d\). Output \emph{photocurrent} \(I_{ph}\) consisting of excited electrons.
+
+\paragraph{Photon flux}
+\[
+    \phi_q = \frac{\text{flux}}{\text{photon energy}} = \frac{EA_d}{hv/\lambda} = \frac{EA_d\lambda}{hc}
+\]
+\paragraph{Photocurrent}
+Photocurrent in the ideal case is
+\[
+    I_{ph} = q \phi_q = q E_q A_q = \frac{q E A_d \lambda}{hc}
+\]
+\paragraph{Quantum efficiency}
+There is not necessarily a one-to-one correspondence between incoming photons, and output photoelectrons, as not all incoming photons contribute. They might be reflected, pass through the detector, or be absorbed somewhere that doesn't contribute to the stream of electrons. Also, the excited electrons can relax before contributing to the photocurrent. We measure the detector's efficiency in terms of
+\[
+    \eta = \frac{\text{output photoelectron rate}}{input photon arrival rate}
+\]
+A more realistic model of the photocurrent therefore is
+\[
+    I_{ph} = q \eta(\lambda) \phi_q
+\]
+\paragraph{Responsivity}
+\[
+    R(\lambda) = \frac{\text{output signal}}{\text{incoming flux}} = \frac{I_{ph}}{EA_d} = q \eta(\lambda) \frac{\lambda}{hc}
+\]
+
+The responsivity to a spectrum \(\phi_e(\lambda)\)
+\[
+    R = \frac{\int_0^\infty R(\lambda)\phi_{e}(\lambda)\; d\lambda}{\int_0^\infty \phi_e(\lambda)\; d\lambda}
+\]
+If the spectrum is a Planck spectrum with temperature \(T\), \(R(T)\) is called the \emph{blackbody responsivity} at temperature \(T\).
+
+This assumes that the detector responds linearly to the amount of light. For modern detectors, this is often the case. However, it might not always be true. Film and eyes are not linear.
+
 
 
 \end{document}
