@@ -200,10 +200,11 @@ Assume input irradiance \(E\) with wavelength \(\lambda\) onto a photon detector
     \phi_q = \frac{\text{flux}}{\text{photon energy}} = \frac{EA_d}{hv/\lambda} = \frac{EA_d\lambda}{hc}
 \]
 \paragraph{Photocurrent}
-Photocurrent in the ideal case is
+In the ideal case, all photons that hit the detector, excite one electron which in turn contributes to the current, given by
 \[
     I_{ph} = q \phi_q = q E_q A_q = \frac{q E A_d \lambda}{hc}
 \]
+
 \paragraph{Quantum efficiency}
 There is not necessarily a one-to-one correspondence between incoming photons, and output photoelectrons, as not all incoming photons contribute. They might be reflected, pass through the detector, or be absorbed somewhere that doesn't contribute to the stream of electrons. Also, the excited electrons can relax before contributing to the photocurrent. We measure the detector's efficiency in terms of
 \[
@@ -225,6 +226,37 @@ The responsivity to a spectrum \(\phi_e(\lambda)\)
 If the spectrum is a Planck spectrum with temperature \(T\), \(R(T)\) is called the \emph{blackbody responsivity} at temperature \(T\).
 
 This assumes that the detector responds linearly to the amount of light. For modern detectors, this is often the case. However, it might not always be true. Film and eyes are not linear.
+
+\paragraph{Frequency dependence of responsivity (time constant)}
+The output signal often cannot represent the incoming photons accurately, because the frequency the photons arrive with (photon flux) is higher than what can propagate as an electric signal. We can approximate this with a time constant
+\[
+    I_{ph}(t) = \frac{\eta(\lambda)q\lambda}{hc}\phi\left(1 - e^{-t/\tau}\right) \quad t > 0
+\]
+where the flux \(\phi\) turn on at \(t=0\).
+
+For AC, we get
+\[
+    |i_{\text{sig}}| = \frac{\lambda q}{h c} \frac{\eta(\lambda) \phi_{sig}}{\sqrt{1 + (2\pi f \tau)^2}}
+\]
+And the responsivity is
+\[
+    R_i(\lambda, f) = \frac{i_{\text{sig}}}{\phi_{\text{sig}}} =  \frac{\lambda q}{h c} \frac{\eta(\lambda) }{\sqrt{1 + (2\pi f \tau)^2}}
+\]
+\paragraph{Dark Current}
+Current from the detector that is not caused by incoming light. Heavily dependent on temperature and voltage across the detector. Impossible to get rid of, but can be measured by blocking out the incoming light, and compensated for in the processing.
+
+\paragraph{Integration and sampling}
+Instead of sampling the output analog signal from the detector at regular intervals, we often perform piecewise integration of the signal, and store the integrated values. In other words, we ``count'' the photons received over a piece of time.
+\[
+    n_e = \frac{Q}{q} = \frac{I_{ph} t_i}{q} = \frac{\eta \phi \lambda t_i}{hc} = \eta \phi_q t_i
+\]
+where \(Q\) is the integral of the photocurrent over a time step \(t_0\) to \(t_i\).
+\[
+    Q = \int_{t_0}^{t_0+t_i} I_{ph} \; dt
+\]
+The time step is known as the \emph{integration time}, or \emph{exposure time} in photography.
+
+In practice, the integration is done with capacitors, which will have a voltage proportional to the integral. At the end of the time step, the voltage is read, and the capacitor reset. 
 
 
 
