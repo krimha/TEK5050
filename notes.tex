@@ -262,6 +262,104 @@ In practice, the integration is done with capacitors, which will have a voltage 
 
 \paragraph{Square law}
 The energy carried by a signal is proportional to the square of the amplitude.
+We write
+\[
+    \phi = \sqrt 2 \phi_{\text{sig}}(1 + \sin({\omega t}))
+\]
+where \(\phi_{\text{sig}}\) is the RMS/effective amplitude.
+Mean flux, or optical power, is given by
+\[
+    \bar{\phi} = \sqrt 2 \phi_{\text{sig}}
+\]
+\[
+    \overline{(\phi(t) - \bar{\phi})^2} = \phi^2_{sig}
+\]
+The electrical signal power is
+\[
+    \overline{i_{sig}^2} = \left(q \eta \frac{\lambda}{hc}\phi_{sig}\right)^2
+\]
+\paragraph{Noise}
+Can characterize by its variance. If \(v(t)\) is the voltage
+\[
+    \overline{(\Delta v)^2} = \overline{(v - \bar v)^2}
+\]
+Typically not interested in phase or offset of the noise (for now).
+
+If the noise is white, and confined to an interval \(\Delta f\), the power of the noise will be proportional to this frequency band. The power of the noise is additive (amplitude is not). The amplitude of the total noise is
+\[
+    \overline{\Delta v_{tot}} = \sqrt{\sum \overline{(\Delta v_i)2}}
+\]
+The strongest component tends to dominate.
+
+\paragraph{Parseval's theorem}
+We say that
+\[
+    S(f) = \lvert F(f) \rvert^2
+\]
+is the power spectrum. Parseval's  states that the integral of the power spectrum is the same as the integral of the squared absolute value of a function (in our case the voltage)
+
+\section{Noise mechanisms}
+
+Photons due not arrive at regular intervals. However, the \emph{probability} that a photon will arrive at a certain point in time, is constant when the photon energy is greater than the mean thermal energy. We can therefore model the arrival of photons with Poisson. The mean number of photons for a time measurement is
+\[
+    \bar n = \phi_q t_ii
+\]
+The probability mass function (pmf) becomes, with \(\lambda = \bar n\)
+\[
+    P(n) = \frac{\bar n ^n}{n!}e^{- \bar n}
+\]
+Both the variance and mean of this Poisson distributed variable, is \(\bar n\). An important remark is that the photon signal has noise that depends on the photon flux.
+
+Note that while this holds for most practical applications, the variance is wavelength-dependent for the longer wavelengths. It comes from Bose--Einstein statistics. The phenomenon is referred to as \emph{photon bunching}.
+
+\paragraph{Photon noise}
+
+Because the photon rate is not constant, the signal out of a detector won't be, either. An analogy is raindrops falling into a bucket. This problem can be experienced when trying to take a picture in a poorly lit environment,where the numbers of incoming photons will be very small as opposed to a well-lit scene. The photon noise leads to similar noise in the output signal. The expression(s) are similar, but we also need to take the quantum efficiency into account.
+
+When expressed in terms of current, the photon noise leads to what we call \emph{shot noise} in the current
+\[
+    i_s^2 = \overline{(i - \bar i)^2} = q \frac{\bar i}{t_i}
+\]
+We can shot that integrating this is equivalent of integrating the power spectrum. We can obtain the relation
+\[
+    \Delta f = \frac{1}{2 t_i}
+\]
+between integration time and signal bandwidth. Because the shot noise is white,
+\[
+    i_s^2 = 2q\bar i \Delta f
+\]
+The absolute photon noise becomes bigger as the light level increases. However, because the number of photons is larger per integration time interval, the Poisson noise is smaller relative to the signal.
+
+\paragraph{Dark current shot noise}
+Must be taken into account. Puts a limit on how weak signals we can detect.
+
+\paragraph{Background noise}
+Our detector might pick up unwanted signals. For instance, a TV would like to pick up only the IR signal from a remote. However, it will also receive thermal radiation from its surroundings.
+
+\paragraph{Johnson noise}
+Noise arising from randomly moving electrons in a circuit. Depends on temperature and resistance.
+
+By constructing an equivalent circuit that gives the same noise in the current, we can compare the noise more easily to the noise in a photocurrent.
+
+\paragraph{Reset noise}
+When an integrating capacitor is reset by short circuiting it, its voltage might not be set to zero. In addition, Johnson noise might lead to fluctuations in the capacitor as long as the switch is closed. When the switch is opened, the voltage freezes. This noise is also known as "\(kTC\) noise", as the variance is \(kTC\). The standard deviation is
+\[
+    \sigma_{\text{reset}} = \sqrt{\frac{kT}{C}}
+\]
+The noise can be improved/circumvented by using some clever tricks.
+
+\paragraph{Random telegraph noise}
+Random switching caused by trapped electrons
+
+\paragraph{\(1/f\) noise}
+The observed power spectrum of noise from sensors can often be modeled by
+\[
+    S_f(f) = \beta_0 \frac{i_0}{f}
+\]
+where \(i_0\) is the DC bias, and \(\beta_0\) is a scaling factor.
+
+Cause of \(1/f\) noise is largely, unknown. 
+
 
 \end{document}
 
