@@ -331,7 +331,7 @@ between integration time and signal bandwidth. Because the shot noise is white,
 The absolute photon noise becomes bigger as the light level increases. However, because the number of photons is larger per integration time interval, the Poisson noise is smaller relative to the signal.
 
 \paragraph{Dark current shot noise}
-Must be taken into account. Puts a limit on how weak signals we can detect.
+Must be taken into account. Puts a limit on how weak signals we can detect. Arises due to some unknown/not modeled process in the detector. Similar to the photon noise, we experience this as ``shots''.
 
 \paragraph{Background noise}
 Our detector might pick up unwanted signals. For instance, a TV would like to pick up only the IR signal from a remote. However, it will also receive thermal radiation from its surroundings.
@@ -360,6 +360,19 @@ where \(i_0\) is the DC bias, and \(\beta_0\) is a scaling factor.
 
 Cause of \(1/f\) noise is largely, unknown. 
 
+\chapter{Noise performance of detectors}
+
+\paragraph{Signal to noise ratio for the incoming photon stream}
+\[
+    \left(\frac{S}{N}\right)_\text{input} = \frac{\bar n_q}{\sigma_q} = \sqrt{\bar n_q}
+\]
+The ``true'' signal cannot be estimated better than this, due to inherent randomness of photon arrival.
+
+\paragraph{Signal to noise ratio for the photoelectron signal}
+\[
+    \left(\frac{S}{N}\right)_\text{output} = \frac{\bar n_e}{\sigma_e} = \sqrt{\eta \bar n_q}
+\]
+This is the case where the photon statistic noise dominates
 
 \end{document}
 
